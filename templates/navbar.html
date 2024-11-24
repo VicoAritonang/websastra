@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar with Hover Animation</title>
+    <style>
+        
+    /* Gaya Dasar */
+            body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{% static 'images/back.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.6); /* Semi-transparan */
+            backdrop-filter: blur(10px); /* Blur hanya elemen belakang */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-menu li {
+            margin: 0 15px;
+            position: relative; /* Untuk membuat elemen hover tetap dalam posisi tombol */
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 12px; /* Membentuk tombol dengan sudut melengkung */
+            z-index: 1;
+        }
+
+        .navbar-menu a:hover {
+            color: #ffffff; /* Warna teks berubah */
+        }
+
+        /* Efek Hover */
+        .navbar-menu li::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3); /* Warna animasi */
+            transform: scale(0); /* Awalnya kecil */
+            transition: transform 0.4s ease-in-out; /* Animasi membesar */
+            z-index: 0;
+        }
+
+        .navbar-menu li:hover::before {
+            transform: scale(1); /* Membesar penuh */
+        }
+
+        .navbar-menu li a {
+            position: relative;
+            z-index: 2; /* Pastikan teks tetap di atas animasi */
+        }
+
+        /* Konten */
+        .content {
+            margin-top: 100px; /* Beri jarak agar tidak tertutup navbar */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-logo">
+
+            <img id="logo_ui" src="{% static 'images/univ_id.png' %}" alt="Logo1">
+
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="">Home</a></li>
+            <li><a href="/our-team/">List Card</a></li>
+        </ul>
+    </div>
+
+    <!-- Konten -->
+
+</body>
+</html>

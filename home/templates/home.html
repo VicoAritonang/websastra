@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        }
+
+        /* Hero Section Fullscreen */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Fullscreen height */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-section img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Stretch and fill the screen */
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1; /* Ensure the content appears above the image */
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            margin: 0;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #379683;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .hero-content button:hover {
+            background-color: #5D5C61;
+            transform: scale(1.1);
+        }
+        .message-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Fullscreen height */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-section img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Stretch and fill the screen */
+            z-index: 0;
+        }
+
+
+            .profile-picture img {
+            
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .message-box {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: slideIn 1s ease-out;
+            transition: transform 0.3s ease;
+            }
+
+            .message-box:hover {
+            transform: scale(1.05);
+            }
+
+            .message-box p {
+            font-size: 1rem;
+            color: #333;
+            margin: 0;
+            }
+
+            .message-box .author {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #555;
+            }
+
+            /* Animations */
+            @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+            }
+
+            @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+            }
+            to {
+                transform: translateY(0);
+            }
+            }
+
+        /* Footer and Other Content (unchanged) */
+        .footer {
+            background: linear-gradient(135deg, #b3cde0, #f5f7fa);
+            padding: 40px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-left img {
+            height: 60px;
+        }
+
+        .footer-center {
+            text-align: center;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-right a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            margin-left: 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-right a:hover {
+            transform: scale(1.2);
+            color: #379683;
+        }
+        button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #camera-stream {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #333;
+    }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <img src="{% static 'images/hero.jpg' %}" alt="Foto Bersama">
+        <div class="hero-content">
+            <h1>Welcome to Web Sastra</h1>
+            <button id="see-more-btn">See More</button>
+        </div>
+    </div>
+
+    <div class="message-section">
+        <!-- <img src="{% static 'images/back.jpg' %}" alt="bg"> -->
+        <div class="profile-picture">
+            <img src="{% static 'images/wepe.jpg' %}" alt="Profile Picture" />
+        </div>
+        <div class="message-box">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting 
+                industry. Lorem Ipsum has been the industry's standard dummy text 
+                ever since the 1500s, when an unknown printer took a galley of type 
+                and scrambled it to make a type specimen book. It has survived not o
+                nly five centuries, but also the leap into electronic typesetting,
+                 remaining essentially unchanged. It was popularised in the 1960s 
+                 with the release of Letraset sheets containing Lorem Ipsum passages, 
+                 and more recently with desktop publishing software 
+                like Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+            <span class="author">- Satrio Wepe</span>
+        </div>
+
+    </div>
+    <h1>Scan Barcode Produk</h1>
+    <button id="start-scan">Mulai Scan</button>
+    <video id="camera-stream" autoplay playsinline></video>
+    <div id="output"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <img src="{% static 'images/univ_id.png' %}" alt="Logo UI">
+        </div>
+        <div class="footer-center">
+            <p>© 2024 Your Organization. All Rights Reserved.</p>
+        </div>
+        <div class="footer-right">
+            <a href="masukkan-url-facebook">Facebook</a>
+            <a href="masukkan-url-instagram">
+                <img src="{% static 'images/icon-instagram.png' %}" alt="Instagram">
+            </a>
+            <a href="masukkan-url-twitter">
+                <img src="{% static 'images/icon-twitter.png' %}" alt="Twitter">
+            </a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr"></script>
+    <script>
+        // Smooth scrolling for "See More" button
+        document.getElementById('see-more-btn').addEventListener('click', function () {
+            document.querySelector('#more').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Animation on Scroll for Hero Content
+        window.addEventListener('scroll', function () {
+            const heroContent = document.querySelector('.hero-content');
+            const scrollY = window.scrollY;
+
+            // Adjust opacity and position based on scroll
+            if (scrollY < 300) {
+                heroContent.style.opacity = 1 - scrollY / 300;
+                heroContent.style.transform = `translateY(${scrollY / 5}px)`;
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+        const messageBox = document.querySelector(".message-box");
+        const profilePic = document.querySelector(".profile-picture img");
+
+        // Add animation on hover
+        profilePic.addEventListener("mouseover", () => {
+            messageBox.classList.add("hover-effect");
+        });
+
+        profilePic.addEventListener("mouseout", () => {
+            messageBox.classList.remove("hover-effect");
+        });
+        });
+
+        const startScanButton = document.getElementById('start-scan');
+    const cameraStream = document.getElementById('camera-stream');
+    const outputDiv = document.getElementById('output');
+
+    let videoStream;
+
+    startScanButton.addEventListener('click', async () => {
+      // Mulai akses kamera
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        cameraStream.srcObject = stream;
+        videoStream = stream;
+
+        // Pindai barcode
+        scanBarcode(cameraStream);
+      } catch (error) {
+        alert("Gagal mengakses kamera: " + error.message);
+      }
+    });
+
+    async function scanBarcode(videoElement) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const scan = async () => {
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+        ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, canvas.width, canvas.height);
+
+        if (code) {
+          // Tampilkan hasil pemindaian
+          outputDiv.textContent = "Kode Ditemukan: " + code.data;
+
+          // Validasi UUID menggunakan regex
+          const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+          if (uuidRegex.test(code.data)) {
+            // Hentikan stream video
+            videoStream.getTracks().forEach(track => track.stop());
+
+            // Redirect ke URL sesuai dengan UUID
+            window.location.href = `/show-card/${code.data}`;
+          } else {
+            outputDiv.textContent = "Kode yang dipindai bukan UUID yang valid.";
+          }
+        }
+
+        // Loop untuk pemindaian berkelanjutan
+        if (videoStream.active) {
+          requestAnimationFrame(scan);
+        }
+      };
+
+      scan();
+    }
+    </script>
+</body>
+</html>
